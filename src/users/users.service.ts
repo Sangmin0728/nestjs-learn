@@ -1,7 +1,7 @@
 import * as uuid from 'uuid'
 import { Inject, Injectable } from '@nestjs/common';
 import { EmailService } from '../email/email.service';
-import { UserInfo } from './interface/user-info';
+import { UserInfoInterface } from './interface/user-info.interface';
 
 @Injectable()
 export class UsersService {
@@ -53,7 +53,7 @@ export class UsersService {
     return `token_${email}_${password}`;
   }
 
-  async getUserInfo(userId: string): Promise<UserInfo> {
+  async getUserInfo(userId: string): Promise<UserInfoInterface> {
     console.log('Getting user info in service');
     return { id: userId, name: 'ex', email: 'ex_email' }
   }
