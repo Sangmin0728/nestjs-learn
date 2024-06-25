@@ -1,9 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Query, Get, Param,
-} from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
@@ -13,6 +8,7 @@ import { UserInfoInterface } from './interface/user-info.interface';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+  // @Inject(UsersService) private readonly usersService: UsersService;
 
   @Post()
   async createUser(@Body() dto: CreateUserDto): Promise<void> {

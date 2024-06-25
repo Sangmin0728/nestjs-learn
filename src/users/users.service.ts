@@ -1,15 +1,13 @@
-import * as uuid from 'uuid'
-import { Inject, Injectable } from '@nestjs/common';
+import * as uuid from 'uuid';
+import { Injectable } from '@nestjs/common';
 import { EmailService } from '../email/email.service';
 import { UserInfoInterface } from './interface/user-info.interface';
 
 @Injectable()
 export class UsersService {
-  @Inject(EmailService) private readonly emailService: EmailService;
+  // @Inject(EmailService) private readonly emailService: EmailService;
 
-  // constructor(private emailService: UsersService) {
-  //
-  // }
+  constructor(private emailService: EmailService) {}
 
   async createUser(name: string, email: string, password: string) {
     await this.checkUserExists(email);
@@ -21,16 +19,28 @@ export class UsersService {
   }
 
   private async checkUserExists(email: string) {
-    console.log('Checking user exists');
+    console.log(`Checking user exists => Email: ${email}`);
     return false; //TODO: DB 연동 후 구현
   }
 
-  private async saveUser(name: string, email: string, password: string, signupVerifyToken: string) {
+  private async saveUser(
+    name: string,
+    email: string,
+    password: string,
+    signupVerifyToken: string,
+  ) {
+    console.log(
+      `Check password: ${password}, signupVerifyToken: ${signupVerifyToken}`,
+    );
+    console.log(`Saving user ${name} with email: ${email}`);
     return; //TODO: DB 연동 후 구현
   }
 
   private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
-    await this.emailService.sendMemberJoinVerificationEmail(email, signupVerifyToken);
+    await this.emailService.sendMemberJoinVerificationEmail(
+      email,
+      signupVerifyToken,
+    );
   }
 
   async verifyEmail(signupVerifyToken: string) {
@@ -55,6 +65,6 @@ export class UsersService {
 
   async getUserInfo(userId: string): Promise<UserInfoInterface> {
     console.log('Getting user info in service');
-    return { id: userId, name: 'ex', email: 'ex_email' }
+    return { id: userId, name: 'ex', email: 'ex_email' };
   }
 }

@@ -18,13 +18,13 @@ export class EmailService {
       auth: {
         user: 'YOUR_GMAIL',
         pass: 'YOUR_PASSWORD',
-      }
-    })
+      },
+    });
   }
 
   async sendMemberJoinVerificationEmail(
     emailAddress: string,
-    signupVerifyToken: string
+    signupVerifyToken: string,
   ): Promise<void> {
     const baseUrl = 'http://localhost:3000';
 
@@ -38,8 +38,8 @@ export class EmailService {
         <form action="${url}" method="POST">
           <button>가입확인</button>
         </form>
-      `
-    }
+      `,
+    };
     return await this.transporter.sendMail(mailOptions);
   }
 }
