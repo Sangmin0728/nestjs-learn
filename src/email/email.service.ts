@@ -16,8 +16,8 @@ export class EmailService {
     this.transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'YOUR_GMAIL',
-        pass: 'YOUR_PASSWORD',
+        user: '*',
+        pass: '*',
       },
     });
   }
@@ -28,7 +28,7 @@ export class EmailService {
   ): Promise<void> {
     const baseUrl = 'http://localhost:3000';
 
-    const url = `${baseUrl}/users/email-verify?signupVerifyToken=${signupVerifyToken}`;
+    const url = `${baseUrl}/users/email-verify`;
 
     const mailOptions: EmailOptions = {
       to: emailAddress,
@@ -36,6 +36,7 @@ export class EmailService {
       html: `
         가입확인 버튼을 누르시면 가입 인증 완료
         <form action="${url}" method="POST">
+          <input type="hidden" name="signupVerifyToken" value="${signupVerifyToken}">
           <button>가입확인</button>
         </form>
       `,
