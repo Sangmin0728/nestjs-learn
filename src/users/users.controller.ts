@@ -34,4 +34,10 @@ export class UsersController {
   async getUserInfo(@Param('id') userId: string): Promise<UserInfoInterface> {
     return await this.usersService.getUserInfo(userId);
   }
+
+  @Get()
+  async getAllUserInfo(): Promise<UserInfoInterface> {
+    console.log('Getting all user info but it is not implemented yet');
+    return;
+  }
 }
