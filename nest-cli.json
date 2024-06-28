@@ -9,6 +9,7 @@
         "include": "./config/env/*.env",
         "outDir": "./dist"
       }
-    ]
+    ],
+    "watchAssets": true
   }
 }
